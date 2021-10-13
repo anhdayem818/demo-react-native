@@ -19,9 +19,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text> {name} </Text>
-      <Text> This is session numner {session.number} and about {session.title} </Text>
-      <Button title="Update State" onPress={ onClickHandler } > </Button>
+      <Text style={styles.text} > {name} </Text>
+      <View>
+        <Text style={styles.text} > This is session numner {session.number} and about {session.title} </Text>
+        <Button title="Update State" onPress={ onClickHandler } > </Button>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -33,5 +35,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 10,
+    borderColor: "#fffccc",
   },
+  text: {
+    fontSize: 12,
+    fontWeight: "bold",
+    textTransform: "uppercase"
+  }
 });
