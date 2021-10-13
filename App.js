@@ -1,11 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  Button,
+  Linking,
+ } from 'react-native';
 
 export default function App() {
+  const [name, setName] = useState('Bach')
+  const [session, setSession] = useState({number: 11, title: "State"})
+
+  const onClickHandler = ()=>{
+    setName("Programing of Bach")
+    setSession({number: session.number+1, title: session.title})
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text> {name} </Text>
+      <Text> This is session numner {session.number} and about {session.title} </Text>
+      <Button title="Update State" onPress={ onClickHandler } > </Button>
       <StatusBar style="auto" />
     </View>
   );
