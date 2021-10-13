@@ -7,6 +7,7 @@ import {
   Button,
   Linking,
   ScrollView,
+  TextInput,
  } from 'react-native';
 
 export default function App() {
@@ -33,17 +34,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {
-          Items.map((object)=>{
-            return (
-              <View key={object.key}>
-                <Text > {object.name}</Text>
-              </View>
-            )
-          })
-        }  
-      </ScrollView>
+      <Text> Write some thiing</Text>
+      <TextInput 
+        style={styles.text_inputs}
+        placeholder="Name"
+        onChangeText={(value)=>setName(value) }
+      > 
+      </TextInput>
+
+      <Text> {name}</Text>
+
     </View>
   );
 }
@@ -51,30 +51,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
     backgroundColor: "#ccc"
   },
-  text: {
-    fontSize: 20,
-    color: '#fff',
-    textAlign: 'center'
-  },
-  view1: {
-    flex: 1,
-    backgroundColor: "#00ffff",
-    justifyContent: 'center',
-  },
-  view2: {
-    flex:1,
-    backgroundColor: "#00ff22",
-    justifyContent: 'center',
-  },
-  view3: {
-    flex:1,
-    backgroundColor: "#00ff81",
-    justifyContent: 'center',
+  text_inputs: {
+    borderWidth: 1,
+    borderColor: '#555',
+    fontSize: 15,
   }
 });
