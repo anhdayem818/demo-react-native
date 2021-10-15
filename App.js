@@ -11,43 +11,38 @@ import {
   Pressable
  } from 'react-native';
 
-import BachBtn from './components/buttons/bach_button.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
-export default function App() {
-  const [name, setName] = useState('Bach')
-  const [submidtted, setSubmidtted]= useState(false)
-  const onPressHandler = () =>{
-    setSubmidtted(!submidtted)
-  }
+import ScreenA from "./screens/screenA"
+import ScreenB from "./screens/screenB"
 
+const App = ()=> {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}> Write some thiing</Text>
-      <TextInput 
-        style={styles.text_inputs}
-        placeholder="Name"
-        onChangeText={(value)=>setName(value) }
-      > 
-      </TextInput>
-      {/* <Button title="Submit" onPress={onPressHandler} >
-      </Button> */}
-
-      <BachBtn 
-        onPressHandler={onPressHandler}
-        title= { submidtted ? 'Clear' : 'Submit' }
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          header: ()=> null,
+        }}
       >
+        <Stack.Screen 
+          name="ScreenA"
+          component={ScreenA}
+          options={{
+            header: ()=> null
+          }}
+        >
+        </Stack.Screen>
 
-      </BachBtn>
-
-      {
-        submidtted ? 
-          <View>
-            <Text> Hello {name}</Text>
-          </View>
-        :
-        null 
-      }
-    </View>
+        <Stack.Screen 
+          name="ScreenB"
+          component={ScreenB}
+          
+        >
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -59,22 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: "#ccc"
   },
-  text: {
-    textAlign: 'center',
-  },
-  text_inputs: {
-    borderWidth: 1,
-    borderColor: '#555',
-    fontSize: 15,
-    width: 200,
-  },
-  button:{
-    borderWidth: 1,
-    borderColor: '#dda',
-    backgroundColor: "#0f0",
-    height: 50,
-    width: 100,
-    textAlign: 'center',
-    justifyContent: 'center',
-  }
 });
+
+
+export default App;
