@@ -12,8 +12,9 @@ import {
  } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+const Tab = createMaterialTopTabNavigator();
 
 import ScreenA from "./screens/screenA"
 import ScreenB from "./screens/screenB"
@@ -21,27 +22,56 @@ import ScreenB from "./screens/screenB"
 const App = ()=> {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          header: ()=> null,
+      <Tab.Navigator
+        screenOptions= { ({route})=>({
+          tabBarIcon: ({focused, size, corlor})=>{
+            let iconName;
+            if(route.name==='ScreenA'){
+              iconName= 'autoprefixer';
+              size = focused ? 25: 20
+            }else if(route.name === 'ScreenB'){
+              iconName= 'btc';
+              size = focused ? 25: 20
+            }
+            let color = focused ? '#f0f' : '#555'
+
+            return(
+              <FontAwesome5
+                name={iconName}
+                size={size}
+                color={color}
+              >
+
+              </FontAwesome5>
+            )
+          },
+        })}
+        tabBarOptions={{
+          showLabel: false,
+        }}
+        barStyle={{
+          backgroundColor: "#ca3"
         }}
       >
-        <Stack.Screen 
+        <Tab.Screen 
           name="ScreenA"
           component={ScreenA}
           options={{
             header: ()=> null
           }}
         >
-        </Stack.Screen>
+        </Tab.Screen>
 
-        <Stack.Screen 
+        <Tab.Screen 
           name="ScreenB"
           component={ScreenB}
+          options={{
+            header: ()=> null
+          }}
           
         >
-        </Stack.Screen>
-      </Stack.Navigator>
+        </Tab.Screen>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
