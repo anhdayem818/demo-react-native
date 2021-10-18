@@ -12,9 +12,9 @@ import {
  } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-const Tab = createMaterialTopTabNavigator();
+const Drawer = createDrawerNavigator();
 
 import ScreenA from "./screens/screenA"
 import ScreenB from "./screens/screenB"
@@ -22,56 +22,55 @@ import ScreenB from "./screens/screenB"
 const App = ()=> {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions= { ({route})=>({
-          tabBarIcon: ({focused, size, corlor})=>{
-            let iconName;
-            if(route.name==='ScreenA'){
-              iconName= 'autoprefixer';
-              size = focused ? 25: 20
-            }else if(route.name === 'ScreenB'){
-              iconName= 'btc';
-              size = focused ? 25: 20
-            }
-            let color = focused ? '#f0f' : '#555'
-
-            return(
-              <FontAwesome5
-                name={iconName}
-                size={size}
-                color={color}
-              >
-
-              </FontAwesome5>
-            )
-          },
-        })}
-        tabBarOptions={{
-          showLabel: false,
-        }}
-        barStyle={{
-          backgroundColor: "#ca3"
+      <Drawer.Navigator
+        initialRouteName="ScreenA"
+        drawerPosition="left"
+        drawerType="front"
+        edgeWidth={100}
+        hideStatusBar={true}
+        screenOptions={{
+          headerShown: true,
+          swipeEnabled: false,
+          headerTitleAlign: "center",
         }}
       >
-        <Tab.Screen 
+        <Drawer.Screen 
           name="ScreenA"
           component={ScreenA}
           options={{
-            header: ()=> null
+            title: "Screen A",
+            drawerIcon: ()=>{
+              return(
+                <FontAwesome5
+                  name="btc"
+                >
+
+                </FontAwesome5>
+              )
+            }
           }}
         >
-        </Tab.Screen>
+        </Drawer.Screen>
 
-        <Tab.Screen 
+        <Drawer.Screen 
           name="ScreenB"
           component={ScreenB}
           options={{
-            header: ()=> null
+            title: "Screen B",
+            drawerIcon: ()=>{
+              return(
+                <FontAwesome5
+                  name="btc"
+                >
+
+                </FontAwesome5>
+              )
+            }
           }}
           
         >
-        </Tab.Screen>
-      </Tab.Navigator>
+        </Drawer.Screen>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
